@@ -26,6 +26,9 @@ public class KafkaController {
     @Value("${kafka.msg.topic}")
     private String MSG_TOPIC;
 
+    @Value("${kafka.msg.topic2}")
+    private String MSG_TOPIC2;
+
     @GetMapping("/")
     public String SayHello() {
         return "Welcome to kafka example";
@@ -46,7 +49,7 @@ public class KafkaController {
     public String publishItem(@PathVariable("itemName") String itemName) {
 
         logger.info("Publishing item {}", itemName);
-        itemKafkaTemplate.send(MSG_TOPIC, new Item("TA001", itemName, 2, 23.33));
+        itemKafkaTemplate.send(MSG_TOPIC2, new Item("TA001", itemName, 2, 23.33));
         logger.info("Item : {} has been published.", itemName);
         return "<h2> Heyy!! Item : " + itemName + " published successfully.</h2>";
     }
