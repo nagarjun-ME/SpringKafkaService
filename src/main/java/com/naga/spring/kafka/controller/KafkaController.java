@@ -15,20 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/naga/k")
 public class KafkaController {
 
-    private Logger logger= LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+
+    //private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private KafkaTemplate<String, Item> itemKafkaTemplate;
 
     @Value("${kafka.msg.topic}")
-    private String MSG_TOPIC ;
+    private String MSG_TOPIC;
 
     @GetMapping("/")
-    public String SayHello(){return  "Welcome to kafka example";}
+    public String SayHello() {
+        return "Welcome to kafka example";
+    }
 
+    /*
     @GetMapping("/{msg}")
     public String publishMessage(@PathVariable ("msg") String msg){
 
@@ -37,13 +40,14 @@ public class KafkaController {
         logger.info("{} has been published.", msg);
         return  "<h2> Heyy!! Message published successfully.</h2>";
     }
+     */
 
     @GetMapping("/item/{itemName}")
-    public String publishItem(@PathVariable ("itemName") String itemName){
+    public String publishItem(@PathVariable("itemName") String itemName) {
 
         logger.info("Publishing item {}", itemName);
-       itemKafkaTemplate.send(MSG_TOPIC,new Item("TA001", itemName, 2,23.33));
+        itemKafkaTemplate.send(MSG_TOPIC, new Item("TA001", itemName, 2, 23.33));
         logger.info("Item : {} has been published.", itemName);
-        return  "<h2> Heyy!! Item : "+itemName+" published successfully.</h2>";
+        return "<h2> Heyy!! Item : " + itemName + " published successfully.</h2>";
     }
 }
