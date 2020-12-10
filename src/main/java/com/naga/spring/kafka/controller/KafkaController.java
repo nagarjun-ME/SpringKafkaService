@@ -17,8 +17,8 @@ public class KafkaController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-    //private KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private KafkaTemplate<String, Item> itemKafkaTemplate;
@@ -34,7 +34,7 @@ public class KafkaController {
         return "Welcome to kafka example";
     }
 
-    /*
+
     @GetMapping("/{msg}")
     public String publishMessage(@PathVariable ("msg") String msg){
 
@@ -43,7 +43,7 @@ public class KafkaController {
         logger.info("{} has been published.", msg);
         return  "<h2> Heyy!! Message published successfully.</h2>";
     }
-     */
+
 
     @GetMapping("/item/{itemName}")
     public String publishItem(@PathVariable("itemName") String itemName) {

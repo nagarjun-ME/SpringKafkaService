@@ -33,4 +33,10 @@ public class ItemKafkaConfiguration {
     {
         return new KafkaTemplate<>(producerFactory());
     }
+
+    @Bean
+    public KafkaTemplate<String, String> getTemplate()
+    {
+        return new KafkaTemplate<String, String>();
+    }
 }
